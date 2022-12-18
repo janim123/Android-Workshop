@@ -161,17 +161,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputAnswer4" />
 
             <Button
-                            android:id="@+id/buttonFinishPoll"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Finish poll"
-                            android:textColor="@color/teal_700"
-                            android:backgroundTint="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/buttonAddQuestion"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="@+id/buttonAddQuestion"
-                            app:layout_constraintTop_toBottomOf="@+id/buttonAddQuestion" />
+                android:id="@+id/buttonFinishPoll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Finish poll"
+                android:textColor="@color/teal_700"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/buttonAddQuestion"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/buttonAddQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddQuestion" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -16,11 +16,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class UserActivity extends AppCompatActivity {
+public class AdminPollsActivity extends AppCompatActivity {
 
     DBHelperDataMain DBMain;
     DBHelperAnswers DBAnswers;
-    Button MyPolls;
+    Button Results;
     RecyclerView recyclerView;
     ArrayList<String> poll_id, poll_name;
     ArrayList<Integer> poll_time, poll_btn;
@@ -32,7 +32,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_admin_polls);
 
         DBMain = new DBHelperDataMain(this);
         DBAnswers = new DBHelperAnswers(this);
@@ -42,7 +42,6 @@ public class UserActivity extends AppCompatActivity {
         poll_time = new ArrayList<>();
         poll_btn = new ArrayList<>();
         recyclerView = new RecyclerView(this);
-        MyPolls = (Button) findViewById(R.id.buttonMyPolls);
         TextView textView = (TextView) findViewById(R.id.textView);
         questions = new ArrayList<Questions>();
         q = new Questions("", "", "", "", "", "", "");
@@ -55,25 +54,18 @@ public class UserActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        pollsAdapter = new PollsAdapter(UserActivity.this, poll_id, poll_name, poll_time, poll_btn, userName,false);
+        pollsAdapter = new PollsAdapter(AdminPollsActivity.this, poll_id, poll_name, poll_time, poll_btn, userName,true);
         recyclerView.setAdapter(pollsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(UserActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(AdminPollsActivity.this));
 
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), QuestionViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ShowAnswersUser.class);
                 startActivity(intent);
             }
         });
-        MyPolls.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FinishedPollsInUsers.class);
-                intent.putExtra("userName",userName);
-                startActivity(intent);
-            }
-        });
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -60,6 +60,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <EditText
+                android:id="@+id/inputPollTime"
+                android:layout_width="0dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Poll duration"
+                android:inputType="number"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/inputPollName"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/inputPollName"
+                app:layout_constraintTop_toBottomOf="@+id/inputPollName"
+                app:layout_constraintTop_toTopOf="@+id/inputPollName" />
+
             <Button
                 android:id="@+id/buttonAddQuestion2"
                 android:layout_width="0dp"
@@ -67,10 +90,10 @@
                 android:layout_marginTop="100dp"
                 android:text="Add question"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/inputPollName"
+                app:layout_constraintEnd_toEndOf="@+id/inputPollTime"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inputPollName"
-                app:layout_constraintTop_toBottomOf="@+id/inputPollName" />
+                app:layout_constraintStart_toStartOf="@+id/inputPollTime"
+                app:layout_constraintTop_toBottomOf="@+id/inputPollTime" />
 
             <!--            <Button-->
 <!--                android:id="@+id/buttonFinishPoll"-->

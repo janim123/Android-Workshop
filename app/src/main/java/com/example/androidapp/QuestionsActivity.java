@@ -8,16 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class QuestionsActivity extends AppCompatActivity {
     EditText addQuestion, answer1, answer2, answer3, answer4;
-    Questions questions;
     Button anotherQuestion;
     Button finishPoll;
-    Integer count = 1;
+    DBHelper DB;
+    DBHelperData DB2;
+    DBHelperDataMain DBMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,14 @@ public class QuestionsActivity extends AppCompatActivity {
         answer4 = (EditText)findViewById(R.id.inputAnswer4);
         anotherQuestion = (Button) findViewById(R.id.buttonAddQuestion);
         finishPoll = (Button) findViewById(R.id.buttonFinishPoll);
-        questions = new Questions();
-        questions.name = "";
-        questions.answers = new ArrayList<>();
+        DB = new DBHelper(this);
+        DB2 = new DBHelperData(this);
+        DBMain = new DBHelperDataMain(this);
+
+        UUID idGUID = java.util.UUID.randomUUID();
 
         Intent i = getIntent();
-        Poll poll = (Poll) i.getSerializableExtra("poll");
-        poll.questions = new ArrayList<>();
+        String pollId = (String) i.getSerializableExtra("pollId");
 
         anotherQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,19 +50,16 @@ public class QuestionsActivity extends AppCompatActivity {
                 String an2 = answer2.getText().toString();
                 String an3 = answer3.getText().toString();
                 String an4 = answer4.getText().toString();
+                String questionId = idGUID.toString();
 
-                questions.name = name;
-                questions.answers.add(an1);
-                questions.answers.add(an2);
-                questions.answers.add(an3);
-                questions.answers.add(an4);
-
-                poll.questions.add(questions);
-
-                    count++;
+                if(name.equals("") || an1.equals("") || an2.equals("")) {
+                    Toast.makeText(QuestionsActivity.this, "Please enter question name and minimum of two answers!", Toast.LENGTH_SHORT).show();
+                } else {
+                    DBMain.insertDataForQuestions(questionId, name, an1, an2, an3, an4, pollId);
+                }
 
                 Intent intent = new Intent(getApplicationContext(), QuestionsActivity.class);
-                intent.putExtra("poll", poll);
+                intent.putExtra("pollId", pollId);
                 startActivity(intent);
             }
         });
@@ -67,10 +68,7 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
-                intent.putExtra("poll", poll);
-                Log.d("myTag", poll.name);
                 startActivity(intent);
-
             }
         });
 
